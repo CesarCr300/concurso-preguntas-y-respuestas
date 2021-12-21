@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es5",                                   
+    "module": "commonjs",                                 
+    "outDir": "./src_js",                                               
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true,           
+    "strict": true,                                                      
+    "skipLibCheck": true                                 
+  },
+  "include":["src/**/*.ts"],
+}
