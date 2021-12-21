@@ -1,0 +1,17 @@
+{
+  "development": {
+    "database": "concurso_preguntas",
+    "dialect": "sqlite",
+    "storage": "concurso_preguntas_desarrollo.db"
+  },
+  "test": {
+    "database": "concurso_preguntas_test",
+    "dialect": "sqlite",
+    "storage": "concurso_preguntas_test.db"
+  },
+  "production": {
+    "database": "concurso_preguntas",
+    "dialect": "sqlite",
+    "storage": "concurso_preguntas_produccion.db"
+  }
+}
