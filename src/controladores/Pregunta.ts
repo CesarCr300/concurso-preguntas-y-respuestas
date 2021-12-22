@@ -9,16 +9,16 @@ export class Pregunta {
   }
   public async obtener_datos() {
     const pregunta = await PreguntaModelo.obtener_por_id(this.id);
-    const objetos_respuestas_erradas =
+    const objetosRespuestasErradas =
       await PreguntaModelo.obtener_respuestas_erradas(pregunta);
-    const respuestas_erradas: string[] = [];
-    for (let objeto_respuesta_errada of objetos_respuestas_erradas) {
-      respuestas_erradas.push(objeto_respuesta_errada.respuesta_errada);
+    const respuestasErradas: string[] = [];
+    for (let objetoRespuestaErrada of objetosRespuestasErradas) {
+      respuestasErradas.push(objetoRespuestaErrada.respuesta_errada);
     }
     return {
       pregunta: pregunta.pregunta as string,
-      respuesta_correcta: pregunta.respuesta_correcta as string,
-      respuestas_erradas,
+      respuestaCorrecta: pregunta.respuesta_correcta as string,
+      respuestasErradas,
     };
   }
 }

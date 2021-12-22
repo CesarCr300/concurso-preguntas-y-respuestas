@@ -1,7 +1,7 @@
 import { prompt } from "../util/prompt";
 
 export class Consola {
-  public retorna_opcion_desea_continuar(
+  public static retorna_opcion_desea_continuar(
     nombre: string,
     premio: number,
     record_rondas: number
@@ -11,36 +11,7 @@ export class Consola {
     );
     return prompt();
   }
-  public mostrar_mensaje_jugador(
-    nombre: string,
-    premio: number,
-    record_rondas: number,
-    frase_inicial: string,
-    frase_final: string
-  ) {
-    let cadena = `${nombre} ${frase_inicial} llegaste hasta la ronda ${record_rondas}, ${frase_final}`;
-    if (premio > 0) {
-      cadena += ` ${premio} puntos.`;
-    }
-    console.log(cadena);
-  }
-  public mostar_juego_finalizado() {
-    console.log("El juego ha finalizado.");
-  }
-  public mostrar_inicio_ronda(
-    numeroRonda: number,
-    pregunta: string,
-    alternativas: string[]
-  ) {
-    console.log(`RONDA N°${numeroRonda}`);
-    console.log(pregunta);
-    let numero_alternativa = 1;
-    for (let alternativa of alternativas) {
-      console.log(numero_alternativa + ") " + alternativa);
-      numero_alternativa++;
-    }
-  }
-  public retornar_alternativa_escogida() {
+  public static retornar_alternativa_escogida() {
     let es_opcion_valida = false;
     let alternativa_escogida = "";
     do {
@@ -56,5 +27,37 @@ export class Consola {
       }
     } while (!es_opcion_valida);
     return alternativa_escogida;
+  }
+  public static retornar_nombre_jugador() {
+    return prompt("Ingrese el nombre del jugador: ");
+  }
+  public static mostrar_mensaje_jugador(
+    nombre: string,
+    premio: number,
+    record_rondas: number,
+    frase_inicial: string,
+    frase_final: string
+  ) {
+    let cadena = `${nombre} ${frase_inicial} llegaste hasta la ronda ${record_rondas}, ${frase_final}`;
+    if (premio > 0) {
+      cadena += ` ${premio} puntos.`;
+    }
+    console.log(cadena);
+  }
+  public static mostar_juego_finalizado() {
+    console.log("El juego ha finalizado.");
+  }
+  public static mostrar_inicio_ronda(
+    numeroRonda: number,
+    pregunta: string,
+    alternativas: string[]
+  ) {
+    console.log(`RONDA N°${numeroRonda}`);
+    console.log(pregunta);
+    let numero_alternativa = 1;
+    for (let alternativa of alternativas) {
+      console.log(numero_alternativa + ") " + alternativa);
+      numero_alternativa++;
+    }
   }
 }

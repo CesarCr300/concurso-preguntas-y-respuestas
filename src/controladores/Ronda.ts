@@ -1,5 +1,4 @@
 import { Categoria } from "./Categoria";
-import { prompt } from "../util/prompt";
 import { RondaServicio } from "../servicios/Ronda";
 
 const RondaModelo = new RondaServicio();
@@ -61,12 +60,12 @@ export class Ronda {
     return alternativas;
   }
   public async retornar_datos() {
-    const { pregunta, respuesta_correcta, respuestas_erradas } =
+    const { pregunta, respuestaCorrecta, respuestasErradas } =
       await this.retornar_datos_pregunta_aleatoria();
     const alternativas = this.retornar_alternativas_desordenadas(
-      respuesta_correcta,
-      respuestas_erradas
+      respuestaCorrecta,
+      respuestasErradas
     );
-    return { pregunta, respuesta_correcta, alternativas };
+    return { pregunta, respuestaCorrecta, alternativas };
   }
 }

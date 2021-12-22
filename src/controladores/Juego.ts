@@ -1,12 +1,9 @@
 import { Ronda } from "./Ronda";
 import { Jugador } from "./Jugador";
-import { prompt } from "../util/prompt";
 import { Consola } from "../vistas/consola";
-const ConsolaVista = new Consola();
-
 const jugadorDefecto = {
   nombre: "JUGADOR",
-  record_rondas: 0,
+  recordRondas: 0,
   premio: 0,
 };
 
@@ -18,21 +15,17 @@ export class Juego {
   }
   //mensajes
   private mensaje_desea_continuar() {
-    const { nombre, premio, record_rondas } =
+    const { nombre, premio, recordRondas } =
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
-    return ConsolaVista.retorna_opcion_desea_continuar(
-      nombre,
-      premio,
-      record_rondas
-    );
+    return Consola.retorna_opcion_desea_continuar(nombre, premio, recordRondas);
   }
   private mensaje_jugador(frase_inicial: string, frase_final: string) {
-    let { nombre, record_rondas, premio } =
+    let { nombre, recordRondas, premio } =
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
-    ConsolaVista.mostrar_mensaje_jugador(
+    Consola.mostrar_mensaje_jugador(
       nombre,
       premio,
-      record_rondas,
+      recordRondas,
       frase_inicial,
       frase_final
     );
@@ -57,32 +50,32 @@ export class Juego {
     const opcion = this.mensaje_desea_continuar();
     return opcion !== "x";
   }
-  private async retornar_objeto_ronda(numero_ronda: number) {
+  private async retornar_objeto_ronda(numeroRonda: number) {
     const ronda_instancia = await this.jugador?.crear_instancia_ronda();
-    return new Ronda(numero_ronda, ronda_instancia);
+    return new Ronda(numeroRonda, ronda_instancia);
   }
-  private async retornar_premio_ronda(numero_ronda: number) {
-    const ronda = await this.retornar_objeto_ronda(numero_ronda);
-    const { pregunta, respuesta_correcta, alternativas } =
+  private async retornar_premio_ronda(numeroRonda: number) {
+    const ronda = await this.retornar_objeto_ronda(numeroRonda);
+    const { pregunta, respuestaCorrecta, alternativas } =
       await ronda.retornar_datos();
-    ConsolaVista.mostrar_inicio_ronda(numero_ronda, pregunta, alternativas);
-    const alternativa_escogida = ConsolaVista.retornar_alternativa_escogida();
+    Consola.mostrar_inicio_ronda(numeroRonda, pregunta, alternativas);
+    const alternativaEscogida = Consola.retornar_alternativa_escogida();
     return ronda.retornar_premio(
-      respuesta_correcta,
+      respuestaCorrecta,
       alternativas,
-      alternativa_escogida
+      alternativaEscogida
     );
   }
   private async ejecucion_rondas() {
     let premio: number;
-    for (let numero_ronda = 1; numero_ronda <= 5; numero_ronda++) {
-      premio = await this.retornar_premio_ronda(numero_ronda);
+    for (let numeroRonda = 1; numeroRonda <= 5; numeroRonda++) {
+      premio = await this.retornar_premio_ronda(numeroRonda);
       if (premio == 0) {
-        this.jugador_perdio();
+        await this.jugador_perdio();
         break;
       }
-      if (numero_ronda == 5) {
-        this.jugador_gano(premio);
+      if (numeroRonda == 5) {
+        await this.jugador_gano(premio);
         break;
       } else {
         await this.jugador?.jugador_gano_ronda(premio);
@@ -96,6 +89,6 @@ export class Juego {
   public async jugar() {
     await this.crear_jugador(this.nombre_jugador);
     await this.ejecucion_rondas();
-    ConsolaVista.mostar_juego_finalizado();
+    Consola.mostar_juego_finalizado();
   }
 }

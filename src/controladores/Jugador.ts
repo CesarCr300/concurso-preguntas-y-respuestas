@@ -5,7 +5,7 @@ const JugadorModelo = new JugadorServicio();
 export class Jugador {
   private nombre: string;
   private premio = 0;
-  private record_rondas: number = 0;
+  private recordRondas: number = 0;
   private instancia?: any;
   private id: number = 1;
   constructor(nombre: string) {
@@ -25,10 +25,10 @@ export class Jugador {
   //manejo de datos
   private async aumentar_record_rondas() {
     await JugadorModelo.actualizar_segun_instancia(this.instancia, {
-      record_rondas: this.record_rondas + 1,
+      recordRondas: this.recordRondas + 1,
     });
     this.instancia = await JugadorModelo.obtener_por_id(this.id);
-    this.record_rondas++;
+    this.recordRondas++;
   }
   private async establecer_premio(premio: number) {
     this.premio += premio;
@@ -41,7 +41,7 @@ export class Jugador {
     const datos = {
       nombre: this.nombre,
       premio: this.premio,
-      record_rondas: this.record_rondas,
+      recordRondas: this.recordRondas,
     };
     return datos;
   }

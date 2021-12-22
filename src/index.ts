@@ -1,10 +1,10 @@
 import { connectDB } from "./baseDeDatos";
-import { prompt } from "./util/prompt";
 import { Juego } from "./controladores/Juego";
+import {Consola} from './vistas/consola'
 async function inicio() {
   let nombreJugador = "";
   do {
-    nombreJugador = prompt("Ingrese el nombre del jugador: ");
+    nombreJugador = Consola.retornar_nombre_jugador();
   } while (nombreJugador === "" || nombreJugador === null);
   if (typeof nombreJugador === "string") {
     const juego = new Juego(nombreJugador);
