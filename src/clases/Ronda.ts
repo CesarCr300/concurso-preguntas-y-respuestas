@@ -2,10 +2,11 @@ import { Categoria } from "./Categoria";
 import { prompt } from "../util/prompt";
 
 export class Ronda {
+  //analizar nombre de ronda
   private numero_ronda: number;
-  private premio: string = "";
-  constructor(numero: number) {
-    this.numero_ronda = numero;
+  private premio: number = 0;
+  constructor(numero_ronda: number) {
+    this.numero_ronda = numero_ronda;
   }
   private async retornar_datos_pregunta_aleatoria() {
     const numeroPregunta: number = Math.floor(Math.random() * 4 + 1);
@@ -37,7 +38,8 @@ export class Ronda {
   private retornar_alternativa_escogida() {
     let es_opcion_valida = false;
     let alternativa_escogida = "";
-    while (!es_opcion_valida) {
+    //convertir a do while
+    do{
       console.log("Ingrese 1,2,3 o 4.");
       alternativa_escogida = prompt("Su respuesta es: ");
       switch (alternativa_escogida) {
@@ -48,7 +50,7 @@ export class Ronda {
           es_opcion_valida = true;
           break;
       }
-    }
+    } while (!es_opcion_valida);
     return alternativa_escogida;
   }
   private corroborar_alternativa_escogida(
@@ -58,10 +60,10 @@ export class Ronda {
   ): boolean {
     const posicion_alternativa_correcta =
       alternativas.indexOf(respuesta_correcta) + 1;
-    console.log("POSICION", posicion_alternativa_correcta);
     return posicion_alternativa_correcta.toString() == alternativa_escogida;
   }
-  public async funcion_principal(): Promise<string> {
+  //renombrar a comenzar_ronda
+  public async funcion_principal(): Promise<number> {
     console.log("RONDA " + this.numero_ronda);
     const { pregunta, respuesta_correcta, respuestas_erradas } =
       await this.retornar_datos_pregunta_aleatoria();
@@ -78,7 +80,7 @@ export class Ronda {
       alternativa_escogida
     )
       ? this.premio
-      : "";
+      : 0;
     return premio;
   }
 }

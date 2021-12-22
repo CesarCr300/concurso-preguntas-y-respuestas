@@ -1,5 +1,5 @@
 export interface IJugadorDatos {
   nombre: string;
-  premios: string[];
+  premio: number;
   record_rondas: number;
 }

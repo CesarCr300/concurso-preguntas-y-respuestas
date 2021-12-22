@@ -20,7 +20,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         autoIncrement: true,
       },
       premio: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       nombre: {

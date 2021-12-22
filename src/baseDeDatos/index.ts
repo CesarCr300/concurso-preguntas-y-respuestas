@@ -9,7 +9,7 @@ export async function connectDB(force: boolean = false) {
     interface ICategoria {
       nombre: string;
       nivel_dificultad: number;
-      premio: string;
+      premio: number;
     }
     interface IPregunta {
       pregunta: string;
@@ -45,7 +45,7 @@ export async function connectDB(force: boolean = false) {
       {
         nombre: "Matemática básica",
         nivel_dificultad: 1,
-        premio: "calculadora básica",
+        premio: 5,
       },
       [
         {
@@ -109,7 +109,7 @@ export async function connectDB(force: boolean = false) {
       {
         nombre: "Matemática intermedias",
         nivel_dificultad: 2,
-        premio: "calculadora cientifica",
+        premio: 10,
       },
       [
         {
@@ -173,7 +173,7 @@ export async function connectDB(force: boolean = false) {
       {
         nombre: "Matemática pre-avanzadas",
         nivel_dificultad: 3,
-        premio: "Libro pre-universitario",
+        premio: 15,
       },
       [
         {
@@ -237,7 +237,7 @@ export async function connectDB(force: boolean = false) {
       {
         nombre: "Matemática avanzada - Derivadas",
         nivel_dificultad: 4,
-        premio: "calculadora gráfica",
+        premio: 20,
       },
       [
         {
@@ -301,7 +301,7 @@ export async function connectDB(force: boolean = false) {
       {
         nombre: "Matemática avanzada - Integrales",
         nivel_dificultad: 5,
-        premio: "libro de calculo integral",
+        premio: 30,
       },
       [
         {

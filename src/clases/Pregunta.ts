@@ -2,6 +2,7 @@ import {PreguntaServicio} from '../servicios/Pregunta'
 
 const PreguntaModelo = new PreguntaServicio();
 
+//llevar a carpeta interfaces
 interface IDatosPregunta {
     pregunta: string,
     respuesta_correcta: string,
