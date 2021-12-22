@@ -4,7 +4,7 @@ import { IJugadorDatos } from "../interfaces/Jugador";
 const JugadorModelo = new JugadorServicio();
 export class Jugador {
   private nombre: string;
-  private premio=0;
+  private premio = 0;
   private record_rondas: number = 0;
   private instancia?: any;
   private id: number = 1;
@@ -12,24 +12,28 @@ export class Jugador {
     this.nombre = nombre;
   }
   //crear_instancia
-  public async crearInstancia() {
-    const instancia = await JugadorModelo.create({ nombre: this.nombre });
+  public async crear_instancia() {
+    const instancia = await JugadorModelo.crear_instancia({
+      nombre: this.nombre,
+    });
     this.instancia = instancia;
     this.id = this.instancia.id;
   }
+  //manejo de datos
+  private async aumentar_record_rondas() {
+    await JugadorModelo.actualizar_segun_instancia(this.instancia, {
+      record_rondas: this.record_rondas + 1,
+    });
+    this.instancia = await JugadorModelo.obtener_por_id(this.id);
+    this.record_rondas++;
+  }
   private async establecer_premio(premio: number) {
-    this.premio+=premio;
-    await JugadorModelo.updateByInstance(this.instancia, {
+    this.premio += premio;
+    await JugadorModelo.actualizar_segun_instancia(this.instancia, {
       premio: this.premio,
     });
   }
-  private async aumentar_record_rondas() {
-    await JugadorModelo.updateByInstance(this.instancia, {
-      record_rondas: this.record_rondas + 1,
-    });
-    this.instancia = await JugadorModelo.getById(this.id);
-    this.record_rondas++;
-  }
+  //informacion_retornada
   public retornar_datos_jugador(): IJugadorDatos {
     const datos = {
       nombre: this.nombre,
@@ -43,7 +47,8 @@ export class Jugador {
     await this.aumentar_record_rondas();
   }
   public async jugador_perdio_ronda() {
-    //premios:""
-    await JugadorModelo.updateByInstance(this.instancia, { premio: 0 });
+    await JugadorModelo.actualizar_segun_instancia(this.instancia, {
+      premio: 0,
+    });
   }
 }

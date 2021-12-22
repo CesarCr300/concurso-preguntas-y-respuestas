@@ -4,7 +4,7 @@ export class PreguntaServicio extends Servicio {
   constructor() {
     super(db.Pregunta);
   }
-  async obtenerRespuestasErradas(instancia:any){
+  async obtener_respuestas_erradas(instancia:any){
     return await instancia.getRespuestaErradas();
   }
 }

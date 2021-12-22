@@ -4,7 +4,7 @@ export class CategoriaServicio extends Servicio {
   constructor() {
     super(db.Categoria);
   }
-  async obtenerPreguntas(instancia:any){
+  async obtener_preguntas(instancia:any){
     return await instancia.getPregunta();
   }
 }

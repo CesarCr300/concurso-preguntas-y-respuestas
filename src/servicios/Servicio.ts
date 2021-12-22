@@ -1,37 +1,37 @@
 export class Servicio {
-  Model: any;
-  constructor(Model: any) {
-    this.Model = Model;
+  Modelo: any;
+  constructor(Modelo: any) {
+    this.Modelo = Modelo;
   }
-  // async getAll(): Promise<object>;
-  // async getAll(params: object): Promise<object>;
-  // async getAll(params?: object) {
-  //   if (params) {
-  //     return await this.Model.findAll(params);
-  //   } else {
-  //     return await this.Model.findAll();
-  //   }
-  // }
-  async getById(id: number): Promise<any> {
-    return await this.Model.findByPk(id);
+  async obtener_todos(): Promise<object>;
+  async obtener_todos(params: object): Promise<object>;
+  async obtener_todos(params?: object) {
+    if (params) {
+      return await this.Modelo.findAll(params);
+    } else {
+      return await this.Modelo.findAll();
+    }
+  }
+  async obtener_por_id(id: number): Promise<any> {
+    return await this.Modelo.findByPk(id);
   }
   //createInstance
-  async create(params: object): Promise<any> {
-    return await this.Model.create(params);
+  async crear_instancia(params: object): Promise<any> {
+    return await this.Modelo.create(params);
   }
-  async setById(id: number, params: object) {
-    const instance = await this.getById(id);
+  async establecer_segun_id(id: number, params: object) {
+    const instance = await this.obtener_por_id(id);
     await instance.set(params);
   }
-  async updateById(id:number, params:object){
-    const instance = await this.getById(id);
-    await instance.update(params)
+  async _segun_id(id: number, params: object) {
+    const instance = await this.obtener_por_id(id);
+    await instance.update(params);
   }
-  async updateByInstance(instance:any, params:object){
-    await instance.update(params)
+  async actualizar_segun_instancia(instance: any, params: object) {
+    await instance.update(params);
   }
-  async deleteById(id: number) {
-    const instance = await this.getById(id);
+  async eliminar_segun_id(id: number) {
+    const instance = await this.obtener_por_id(id);
     await instance.destroy();
   }
 }

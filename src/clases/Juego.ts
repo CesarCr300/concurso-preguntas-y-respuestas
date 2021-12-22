@@ -3,10 +3,9 @@ import { Jugador } from "./Jugador";
 import { prompt } from "../util/prompt";
 export class Juego {
   jugador?: Jugador;
-  //separar jugador
-  private solicitar_datos_jugador(): string {
-    const nombre = prompt("Ingrese su nombre: ");
-    return nombre;
+  nombre_jugador: string;
+  constructor(nombre_jugador: string) {
+    this.nombre_jugador = nombre_jugador;
   }
   //mensajes
   private mensaje_desea_continuar() {}
@@ -34,28 +33,34 @@ export class Juego {
         objeto.premio
     );
   }
+  //se ejecuta segun jugador
   private async jugador_perdio() {
     await this.jugador?.jugador_perdio_ronda();
     this.mensaje_jugador_perdio();
   }
-  //creacion
+  private async jugador_gano(premio: number) {
+    await this.jugador?.jugador_gano_ronda(premio);
+    this.mensaje_jugador_gano();
+  }
+  //creacion jugador
   private async crear_jugador(nombre: string) {
     const jugador = new Jugador(nombre);
+    await jugador.crear_instancia();
     this.jugador = jugador;
   }
   //ejecución/lógica del juego
   private async ejecucion_rondas() {
     let ronda;
     let premio;
-    for (let i = 1; i <= 5; i++) {
-      ronda = new Ronda(i);
-      premio = await ronda.funcion_principal();
+    for (let numero_ronda = 1; numero_ronda <= 5; numero_ronda++) {
+      ronda = new Ronda(numero_ronda);
+      premio = await ronda.comenzar_ronda();
       if (premio == 0) {
         this.jugador_perdio();
         break;
       }
-      if (i == 5) {
-        this.mensaje_jugador_gano();
+      if (numero_ronda == 5) {
+        this.jugador_gano(premio);
         break;
       } else {
         await this.jugador?.jugador_gano_ronda(premio);
@@ -63,10 +68,7 @@ export class Juego {
     }
   }
   public async jugar() {
-    const nombre = this.solicitar_datos_jugador();
-    await this.crear_jugador(nombre);
-    await this.jugador?.crearInstancia();
-
+    await this.crear_jugador(this.nombre_jugador);
     this.ejecucion_rondas();
   }
 }

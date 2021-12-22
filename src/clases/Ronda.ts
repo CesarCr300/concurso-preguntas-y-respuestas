@@ -29,17 +29,17 @@ export class Ronda {
     return alternativas;
   }
   private mostrar_alternativas(alternativas: string[]) {
-    let i = 1;
+    let numero_alternativa = 1;
     for (let alternativa of alternativas) {
-      console.log(i + ") " + alternativa);
-      i++;
+      console.log(numero_alternativa + ") " + alternativa);
+      numero_alternativa++;
     }
   }
   private retornar_alternativa_escogida() {
     let es_opcion_valida = false;
     let alternativa_escogida = "";
     //convertir a do while
-    do{
+    do {
       console.log("Ingrese 1,2,3 o 4.");
       alternativa_escogida = prompt("Su respuesta es: ");
       switch (alternativa_escogida) {
@@ -63,7 +63,7 @@ export class Ronda {
     return posicion_alternativa_correcta.toString() == alternativa_escogida;
   }
   //renombrar a comenzar_ronda
-  public async funcion_principal(): Promise<number> {
+  public async comenzar_ronda(): Promise<number> {
     console.log("RONDA " + this.numero_ronda);
     const { pregunta, respuesta_correcta, respuestas_erradas } =
       await this.retornar_datos_pregunta_aleatoria();
@@ -73,6 +73,7 @@ export class Ronda {
       respuestas_erradas
     );
     this.mostrar_alternativas(alternativas);
+    //aqui
     const alternativa_escogida = this.retornar_alternativa_escogida();
     const premio = this.corroborar_alternativa_escogida(
       respuesta_correcta,
