@@ -47,6 +47,7 @@ export class Juego {
     await jugador.crear_instancia();
     this.jugador = jugador;
   }
+  //creacion instancia ronda
   //ejecución/lógica del juego
   private desea_continuar() {
     const opcion = this.mensaje_desea_continuar();
@@ -56,7 +57,8 @@ export class Juego {
     let ronda;
     let premio: number;
     for (let numero_ronda = 1; numero_ronda <= 5; numero_ronda++) {
-      ronda = new Ronda(numero_ronda);
+      const ronda_instancia = await this.jugador?.crear_instancia_ronda();
+      ronda = new Ronda(numero_ronda, ronda_instancia);
       premio = await ronda.comenzar_ronda();
       if (premio == 0) {
         this.jugador_perdio();

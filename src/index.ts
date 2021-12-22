@@ -1,7 +1,7 @@
 import { connectDB } from "./baseDeDatos";
 import { prompt } from "./util/prompt";
 import { Juego } from "./clases/Juego";
-connectDB(true).then(async () => {
+connectDB().then(async () => {
   let nombreJugador = "";
   do {
     nombreJugador = prompt("Ingrese el nombre del jugador: ");

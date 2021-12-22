@@ -1,17 +1,16 @@
 import { Categoria } from "./Categoria";
 import { prompt } from "../util/prompt";
+import { RondaServicio } from "../servicios/Ronda";
 
+const RondaModelo = new RondaServicio();
 export class Ronda {
   //analizar nombre de ronda
   private numero_ronda: number;
   private premio: number = 0;
-  private instancia:any;
-  constructor(numero_ronda: number) {
+  private instancia: any;
+  constructor(numero_ronda: number, instancia: any) {
     this.numero_ronda = numero_ronda;
-  }
-  //creacion instancia
-  private async creacion_instancia(){
-    
+    this.instancia = instancia;
   }
   //mostrar datos
   private mostrar_pregunta(pregunta: string) {
@@ -37,8 +36,11 @@ export class Ronda {
   //retornar datos
   private async retornar_datos_pregunta_aleatoria() {
     const numeroPregunta: number = Math.floor(Math.random() * 4 + 1);
-    const categoria = new Categoria(this.numero_ronda);
-    await categoria.establecer_instancia();
+    const instanciaCategoria = await RondaModelo.relacionar_con_categoria(
+      this.numero_ronda,
+      this.instancia
+    );
+    const categoria = new Categoria(this.numero_ronda, instanciaCategoria);
     this.premio = await categoria.retornar_premio();
     return await categoria.retornar_datos_pregunta(numeroPregunta);
   }
