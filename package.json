@@ -4,18 +4,26 @@
   "description": "",
   "main": "src_js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsnd --respawn src/index.ts",
+    "start": "node src_js/index.js",
+    "seeder":"tsnd --respawn src/baseDeDatos/seeders/Categorias.ts"
   },
   "keywords": [],
   "author": "Cesar Jesus Contreras Romero",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^17.0.2",
+    "@types/prompt-sync": "^4.1.1",
     "@types/sequelize": "^4.28.10",
     "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.3.0",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "sequelize": "^6.12.1"
+    "prompt-sync": "^4.2.0",
+    "sequelize": "^6.12.1",
+    "sqlite3": "^5.0.2"
   }
 }
