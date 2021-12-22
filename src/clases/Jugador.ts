@@ -19,6 +19,9 @@ export class Jugador {
     this.instancia = instancia;
     this.id = this.instancia.id;
   }
+  public async crear_instancia_ronda(){
+    return await JugadorModelo.crear_instancia_ronda(this.instancia);
+  }
   //manejo de datos
   private async aumentar_record_rondas() {
     await JugadorModelo.actualizar_segun_instancia(this.instancia, {

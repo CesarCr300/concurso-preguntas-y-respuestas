@@ -8,7 +8,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      Ronda.belongsTo(models.Categoria);
+      Ronda.belongsToMany(models.Categoria, { through: models.rondaCategoria });
       Ronda.belongsTo(models.Jugador);
     }
   }

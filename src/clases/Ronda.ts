@@ -5,8 +5,13 @@ export class Ronda {
   //analizar nombre de ronda
   private numero_ronda: number;
   private premio: number = 0;
+  private instancia:any;
   constructor(numero_ronda: number) {
     this.numero_ronda = numero_ronda;
+  }
+  //creacion instancia
+  private async creacion_instancia(){
+    
   }
   //mostrar datos
   private mostrar_pregunta(pregunta: string) {
