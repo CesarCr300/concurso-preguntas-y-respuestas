@@ -51,8 +51,8 @@ export class Juego {
     return opcion !== "x";
   }
   private async retornar_objeto_ronda(numeroRonda: number) {
-    const ronda_instancia = await this.jugador?.crear_instancia_ronda();
-    return new Ronda(numeroRonda, ronda_instancia);
+    const rondaInstancia = await this.jugador?.crear_instancia_ronda();
+    return new Ronda(numeroRonda, rondaInstancia);
   }
   private async retornar_premio_ronda(numeroRonda: number) {
     const ronda = await this.retornar_objeto_ronda(numeroRonda);

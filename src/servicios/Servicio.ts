@@ -4,10 +4,10 @@ export class Servicio {
     this.Modelo = Modelo;
   }
   async obtener_todos(): Promise<object>;
-  async obtener_todos(params: object): Promise<object>;
-  async obtener_todos(params?: object) {
-    if (params) {
-      return await this.Modelo.findAll(params);
+  async obtener_todos(parametros: object): Promise<object>;
+  async obtener_todos(parametros?: object) {
+    if (parametros) {
+      return await this.Modelo.findAll(parametros);
     } else {
       return await this.Modelo.findAll();
     }
@@ -15,23 +15,23 @@ export class Servicio {
   async obtener_por_id(id: number): Promise<any> {
     return await this.Modelo.findByPk(id);
   }
-  //createInstance
-  async crear_instancia(params: object): Promise<any> {
-    return await this.Modelo.create(params);
+  //crear instancia
+  async crear_instancia(parametros: object): Promise<any> {
+    return await this.Modelo.create(parametros);
   }
-  async establecer_segun_id(id: number, params: object) {
-    const instance = await this.obtener_por_id(id);
-    await instance.set(params);
+  async establecer_segun_id(id: number, parametros: object) {
+    const instancia = await this.obtener_por_id(id);
+    await instancia.set(parametros);
   }
-  async _segun_id(id: number, params: object) {
-    const instance = await this.obtener_por_id(id);
-    await instance.update(params);
+  async _segun_id(id: number, parametros: object) {
+    const instancia = await this.obtener_por_id(id);
+    await instancia.update(parametros);
   }
-  async actualizar_segun_instancia(instance: any, params: object) {
-    await instance.update(params);
+  async actualizar_segun_instancia(instancia: any, parametros: object) {
+    await instancia.update(parametros);
   }
   async eliminar_segun_id(id: number) {
-    const instance = await this.obtener_por_id(id);
-    await instance.destroy();
+    const instancia = await this.obtener_por_id(id);
+    await instancia.destroy();
   }
 }

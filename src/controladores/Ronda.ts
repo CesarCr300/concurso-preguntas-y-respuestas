@@ -4,11 +4,11 @@ import { RondaServicio } from "../servicios/Ronda";
 const RondaModelo = new RondaServicio();
 export class Ronda {
   //analizar nombre de ronda
-  private numero_ronda: number;
+  private numeroRonda: number;
   private premio: number = 0;
   private instancia: any;
-  constructor(numero_ronda: number, instancia: any) {
-    this.numero_ronda = numero_ronda;
+  constructor(numeroRonda: number, instancia: any) {
+    this.numeroRonda = numeroRonda;
     this.instancia = instancia;
   }
   //logica
@@ -37,7 +37,7 @@ export class Ronda {
   //creacion instancias
   private async crear_instancia_categoria() {
     return await RondaModelo.relacionar_con_categoria(
-      this.numero_ronda,
+      this.numeroRonda,
       this.instancia
     );
   }
@@ -45,7 +45,7 @@ export class Ronda {
   private async retornar_datos_pregunta_aleatoria() {
     const numeroPregunta: number = Math.floor(Math.random() * 4 + 1);
     const instanciaCategoria = await this.crear_instancia_categoria();
-    const categoria = new Categoria(this.numero_ronda, instanciaCategoria);
+    const categoria = new Categoria(this.numeroRonda, instanciaCategoria);
     this.premio = await categoria.retornar_premio();
     return await categoria.retornar_datos_pregunta(numeroPregunta);
   }
