@@ -1,6 +1,8 @@
 import { Ronda } from "./Ronda";
 import { Jugador } from "./Jugador";
 import { prompt } from "../util/prompt";
+import { Consola } from "../vistas/consola";
+const ConsolaVista = new Consola();
 
 const jugadorDefecto = {
   nombre: "JUGADOR",
@@ -18,19 +20,18 @@ export class Juego {
   private mensaje_desea_continuar() {
     const { nombre, premio, record_rondas } =
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
-    console.log(
-      `${nombre} has superado con exito la ronda ${record_rondas}, hasta el momento tienes ${premio} puntos. Si no desea continuar, pulsa la x, si no pulsa cualquier tecla`
-    );
-    return prompt();
+    return ConsolaVista.retorna_opcion_desea_continuar(nombre, premio, record_rondas);
   }
   private mensaje_jugador(frase_inicial: string, frase_final: string) {
     let { nombre, record_rondas, premio } =
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
-    let cadena = `${nombre} ${frase_inicial} llegaste hasta la ronda ${record_rondas}, ${frase_final}`;
-    if (premio > 0) {
-      cadena += ` ${premio} puntos.`;
-    }
-    console.log(cadena);
+    ConsolaVista.mostrar_mensaje_jugador(
+      nombre,
+      premio,
+      record_rondas,
+      frase_inicial,
+      frase_final
+    );
   }
   //se ejecuta segun jugador
   private async jugador_perdio() {
@@ -70,7 +71,7 @@ export class Juego {
       } else {
         await this.jugador?.jugador_gano_ronda(premio);
         if (!this.desea_continuar()) {
-          this.mensaje_jugador("felicidades", "has ganado:");
+          this.mensaje_jugador("felicitaciones,", "has ganado:");
           break;
         }
       }
@@ -78,6 +79,7 @@ export class Juego {
   }
   public async jugar() {
     await this.crear_jugador(this.nombre_jugador);
-    this.ejecucion_rondas();
+    await this.ejecucion_rondas();
+    ConsolaVista.mostar_juego_finalizado();
   }
 }

@@ -1,6 +1,6 @@
 import { connectDB } from "./baseDeDatos";
 import { prompt } from "./util/prompt";
-import { Juego } from "./clases/Juego";
+import { Juego } from "./controladores/Juego";
 connectDB().then(async () => {
   let nombreJugador = "";
   do {
@@ -9,7 +9,6 @@ connectDB().then(async () => {
   if (nombreJugador !== null) {
     const juego = new Juego(nombreJugador);
     await juego.jugar();
-    console.log("JUEGO FINALIZADO");
   } else {
     console.log("JUEGO FINALIZADO");
   }

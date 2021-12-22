@@ -57,7 +57,6 @@ export class Ronda {
   private retornar_alternativa_escogida() {
     let es_opcion_valida = false;
     let alternativa_escogida = "";
-    //convertir a do while
     do {
       console.log("Ingrese 1,2,3 o 4.");
       alternativa_escogida = prompt("Su respuesta es: ");
@@ -72,7 +71,6 @@ export class Ronda {
     } while (!es_opcion_valida);
     return alternativa_escogida;
   }
-  //renombrar a comenzar_ronda
   public async comenzar_ronda(): Promise<number> {
     console.log("RONDA " + this.numero_ronda);
     const { pregunta, respuesta_correcta, respuestas_erradas } =
