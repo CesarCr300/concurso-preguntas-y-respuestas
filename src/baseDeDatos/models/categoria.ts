@@ -28,7 +28,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
         type: DataTypes.ENUM(1, 2, 3, 4, 5),
       },
       premio: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },

@@ -8,15 +8,34 @@ export class Ronda {
   constructor(numero_ronda: number) {
     this.numero_ronda = numero_ronda;
   }
+  //mostrar datos
+  private mostrar_pregunta(pregunta: string) {
+    console.log(pregunta);
+  }
+  private mostrar_alternativas(alternativas: string[]) {
+    let numero_alternativa = 1;
+    for (let alternativa of alternativas) {
+      console.log(numero_alternativa + ") " + alternativa);
+      numero_alternativa++;
+    }
+  }
+  //logica
+  private corroborar_alternativa_escogida(
+    respuesta_correcta: string,
+    alternativas: string[],
+    alternativa_escogida: string
+  ): boolean {
+    const posicion_alternativa_correcta =
+      alternativas.indexOf(respuesta_correcta) + 1;
+    return posicion_alternativa_correcta.toString() == alternativa_escogida;
+  }
+  //retornar datos
   private async retornar_datos_pregunta_aleatoria() {
     const numeroPregunta: number = Math.floor(Math.random() * 4 + 1);
     const categoria = new Categoria(this.numero_ronda);
     await categoria.establecer_instancia();
     this.premio = await categoria.retornar_premio();
     return await categoria.retornar_datos_pregunta(numeroPregunta);
-  }
-  private mostrar_pregunta(pregunta: string) {
-    console.log(pregunta);
   }
   private retornar_alternativas_desordenadas(
     alternativa_correcta: string,
@@ -27,13 +46,6 @@ export class Ronda {
       return Math.random() - 0.5;
     });
     return alternativas;
-  }
-  private mostrar_alternativas(alternativas: string[]) {
-    let numero_alternativa = 1;
-    for (let alternativa of alternativas) {
-      console.log(numero_alternativa + ") " + alternativa);
-      numero_alternativa++;
-    }
   }
   private retornar_alternativa_escogida() {
     let es_opcion_valida = false;
@@ -52,15 +64,6 @@ export class Ronda {
       }
     } while (!es_opcion_valida);
     return alternativa_escogida;
-  }
-  private corroborar_alternativa_escogida(
-    respuesta_correcta: string,
-    alternativas: string[],
-    alternativa_escogida: string
-  ): boolean {
-    const posicion_alternativa_correcta =
-      alternativas.indexOf(respuesta_correcta) + 1;
-    return posicion_alternativa_correcta.toString() == alternativa_escogida;
   }
   //renombrar a comenzar_ronda
   public async comenzar_ronda(): Promise<number> {
