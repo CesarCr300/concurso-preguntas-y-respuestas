@@ -1,15 +1,16 @@
 import { connectDB } from "./baseDeDatos";
 import { prompt } from "./util/prompt";
 import { Juego } from "./controladores/Juego";
-connectDB().then(async () => {
+async function inicio() {
   let nombreJugador = "";
   do {
     nombreJugador = prompt("Ingrese el nombre del jugador: ");
-  } while (nombreJugador === "");
-  if (nombreJugador !== null) {
+  } while (nombreJugador === "" || nombreJugador === null);
+  if (typeof nombreJugador === "string") {
     const juego = new Juego(nombreJugador);
     await juego.jugar();
-  } else {
-    console.log("JUEGO FINALIZADO");
   }
+}
+connectDB().then(async () => {
+  await inicio();
 });

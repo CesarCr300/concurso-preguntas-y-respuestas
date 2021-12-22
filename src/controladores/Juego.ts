@@ -20,7 +20,11 @@ export class Juego {
   private mensaje_desea_continuar() {
     const { nombre, premio, record_rondas } =
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
-    return ConsolaVista.retorna_opcion_desea_continuar(nombre, premio, record_rondas);
+    return ConsolaVista.retorna_opcion_desea_continuar(
+      nombre,
+      premio,
+      record_rondas
+    );
   }
   private mensaje_jugador(frase_inicial: string, frase_final: string) {
     let { nombre, record_rondas, premio } =
@@ -48,19 +52,31 @@ export class Juego {
     await jugador.crear_instancia();
     this.jugador = jugador;
   }
-  //creacion instancia ronda
   //ejecución/lógica del juego
   private desea_continuar() {
     const opcion = this.mensaje_desea_continuar();
     return opcion !== "x";
   }
+  private async retornar_objeto_ronda(numero_ronda: number) {
+    const ronda_instancia = await this.jugador?.crear_instancia_ronda();
+    return new Ronda(numero_ronda, ronda_instancia);
+  }
+  private async retornar_premio_ronda(numero_ronda: number) {
+    const ronda = await this.retornar_objeto_ronda(numero_ronda);
+    const { pregunta, respuesta_correcta, alternativas } =
+      await ronda.retornar_datos();
+    ConsolaVista.mostrar_inicio_ronda(numero_ronda, pregunta, alternativas);
+    const alternativa_escogida = ConsolaVista.retornar_alternativa_escogida();
+    return ronda.retornar_premio(
+      respuesta_correcta,
+      alternativas,
+      alternativa_escogida
+    );
+  }
   private async ejecucion_rondas() {
-    let ronda;
     let premio: number;
     for (let numero_ronda = 1; numero_ronda <= 5; numero_ronda++) {
-      const ronda_instancia = await this.jugador?.crear_instancia_ronda();
-      ronda = new Ronda(numero_ronda, ronda_instancia);
-      premio = await ronda.comenzar_ronda();
+      premio = await this.retornar_premio_ronda(numero_ronda);
       if (premio == 0) {
         this.jugador_perdio();
         break;

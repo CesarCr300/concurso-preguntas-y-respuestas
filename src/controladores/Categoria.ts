@@ -9,9 +9,6 @@ export class Categoria {
     this.id = id;
     this.instancia = instancia;
   }
-  // async establecer_instancia() {
-  //   this.instancia = await CategoriaModelo.obtener_por_id(this.id);
-  // }
   async retornar_datos_pregunta(numeroPregunta: number) {
     const preguntas = await CategoriaModelo.obtener_preguntas(this.instancia);
     const preguntaId = preguntas[numeroPregunta].id;

@@ -24,7 +24,37 @@ export class Consola {
     }
     console.log(cadena);
   }
-  public mostar_juego_finalizado(){
-    console.log("El juego ha finalizado.")
+  public mostar_juego_finalizado() {
+    console.log("El juego ha finalizado.");
+  }
+  public mostrar_inicio_ronda(
+    numeroRonda: number,
+    pregunta: string,
+    alternativas: string[]
+  ) {
+    console.log(`RONDA N°${numeroRonda}`);
+    console.log(pregunta);
+    let numero_alternativa = 1;
+    for (let alternativa of alternativas) {
+      console.log(numero_alternativa + ") " + alternativa);
+      numero_alternativa++;
+    }
+  }
+  public retornar_alternativa_escogida() {
+    let es_opcion_valida = false;
+    let alternativa_escogida = "";
+    do {
+      console.log("Ingrese 1,2,3 o 4.");
+      alternativa_escogida = prompt("Su respuesta es: ");
+      switch (alternativa_escogida) {
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+          es_opcion_valida = true;
+          break;
+      }
+    } while (!es_opcion_valida);
+    return alternativa_escogida;
   }
 }
