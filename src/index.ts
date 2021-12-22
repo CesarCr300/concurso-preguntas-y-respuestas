@@ -8,7 +8,7 @@ connectDB().then(async () => {
   } while (nombreJugador === "");
   if (nombreJugador !== null) {
     const juego = new Juego(nombreJugador);
-    juego.jugar();
+    await juego.jugar();
     console.log("JUEGO FINALIZADO");
   } else {
     console.log("JUEGO FINALIZADO");

@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn src/index.ts",
-    "start": "node src_js/index.js",
-    "seeder":"tsnd --respawn src/baseDeDatos/seeders/Categorias.ts"
+    "start": "ts-node src/index.ts",
+    "seeder": "tsnd --respawn src/baseDeDatos/seeders/Categorias.ts"
   },
   "keywords": [],
   "author": "Cesar Jesus Contreras Romero",
@@ -24,6 +24,7 @@
   "dependencies": {
     "prompt-sync": "^4.2.0",
     "sequelize": "^6.12.1",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5.0.2",
+    "ts-node": "^10.4.0"
   }
 }
