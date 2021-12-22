@@ -18,9 +18,16 @@ export class Servicio {
   async create(params: object): Promise<any> {
     return await this.Model.create(params);
   }
-  async updateById(id: number, params: object) {
+  async setById(id: number, params: object) {
     const instance = await this.getById(id);
     await instance.set(params);
+  }
+  async updateById(id:number, params:object){
+    const instance = await this.getById(id);
+    await instance.update(params)
+  }
+  async updateByInstance(instance:any, params:object){
+    await instance.update(params)
   }
   async deleteById(id: number) {
     const instance = await this.getById(id);
