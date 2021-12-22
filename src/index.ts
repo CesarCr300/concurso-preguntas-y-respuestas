@@ -1,11 +1,16 @@
 import { connectDB } from "./baseDeDatos";
 import { prompt } from "./util/prompt";
 import { Juego } from "./clases/Juego";
-connectDB().then(async () => {
+connectDB(true).then(async () => {
   let nombreJugador = "";
   do {
     nombreJugador = prompt("Ingrese el nombre del jugador: ");
   } while (nombreJugador === "");
-  const juego = new Juego(nombreJugador);
-  juego.jugar();
+  if (nombreJugador !== null) {
+    const juego = new Juego(nombreJugador);
+    juego.jugar();
+    console.log("JUEGO FINALIZADO");
+  } else {
+    console.log("JUEGO FINALIZADO");
+  }
 });

@@ -1,17 +1,18 @@
 "use strict";
 import { Model } from "sequelize";
 module.exports = (sequelize: any, DataTypes: any) => {
-  class Jugador extends Model {
+  class Ronda extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      Jugador.hasMany(models.Ronda)
+      Ronda.belongsTo(models.Categoria);
+      Ronda.belongsTo(models.Jugador);
     }
   }
-  Jugador.init(
+  Ronda.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -19,23 +20,11 @@ module.exports = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      premio: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      nombre: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      record_rondas: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
     },
     {
       sequelize,
-      modelName: "Jugador",
+      modelName: "Ronda",
     }
   );
-  return Jugador;
+  return Ronda;
 };

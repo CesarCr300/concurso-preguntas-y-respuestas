@@ -9,6 +9,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      */
     static associate(models: any) {
       Categoria.hasMany(models.Pregunta);
+      Categoria.hasMany(models.Ronda);
     }
   }
   Categoria.init(
