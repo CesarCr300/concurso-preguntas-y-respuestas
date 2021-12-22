@@ -1,16 +1,16 @@
 import { Categoria } from "./Categoria";
-
-const prompt = require("prompt-sync")();
+import { prompt } from "../util/prompt";
 
 export class Ronda {
   private numero_ronda: number;
-  private premio: string="";
+  private premio: string = "";
   constructor(numero: number) {
     this.numero_ronda = numero;
   }
   private async retornar_datos_pregunta_aleatoria() {
     const numeroPregunta: number = Math.floor(Math.random() * 4 + 1);
     const categoria = new Categoria(this.numero_ronda);
+    await categoria.establecer_instancia();
     this.premio = await categoria.retornar_premio();
     return await categoria.retornar_datos_pregunta(numeroPregunta);
   }
@@ -57,11 +57,12 @@ export class Ronda {
     alternativa_escogida: string
   ): boolean {
     const posicion_alternativa_correcta =
-      alternativas.indexOf(respuesta_correcta)+1;
-    console.log("POSICION",posicion_alternativa_correcta);
+      alternativas.indexOf(respuesta_correcta) + 1;
+    console.log("POSICION", posicion_alternativa_correcta);
     return posicion_alternativa_correcta.toString() == alternativa_escogida;
   }
   public async funcion_principal(): Promise<string> {
+    console.log("RONDA " + this.numero_ronda);
     const { pregunta, respuesta_correcta, respuestas_erradas } =
       await this.retornar_datos_pregunta_aleatoria();
     this.mostrar_pregunta(pregunta);
@@ -75,7 +76,9 @@ export class Ronda {
       respuesta_correcta,
       alternativas,
       alternativa_escogida
-    )?this.premio:"";
+    )
+      ? this.premio
+      : "";
     return premio;
   }
 }

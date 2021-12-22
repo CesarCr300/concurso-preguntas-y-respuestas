@@ -3,16 +3,17 @@ import { IJugadorDatos } from "../interfaces/Jugador";
 
 const JugadorModelo = new JugadorServicio();
 export class Jugador {
-  nombre: string;
-  premios: string[] = [];
-  record_rondas: number = 0;
-  instancia?: any;
-  id: number = 1;
+  private nombre: string;
+  private premios: string[] = [];
+  private record_rondas: number = 0;
+  private instancia?: any;
+  private id: number = 1;
   constructor(nombre: string) {
     this.nombre = nombre;
   }
   public async crearInstancia() {
-    this.instancia = await JugadorModelo.create({ nombre: this.nombre });
+    const instancia = await JugadorModelo.create({ nombre: this.nombre });
+    this.instancia = instancia;
     this.id = this.instancia.id;
   }
   private async establecer_premio(premio: string) {
@@ -40,5 +41,8 @@ export class Jugador {
   public async jugador_gano_ronda(premio: string) {
     await this.establecer_premio(premio);
     await this.aumentar_record_rondas();
+  }
+  public async jugador_perdio_ronda() {
+    this.premios = [];
   }
 }
