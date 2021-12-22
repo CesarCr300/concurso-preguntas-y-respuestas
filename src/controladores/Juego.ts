@@ -1,6 +1,7 @@
 import { Ronda } from "./Ronda";
 import { Jugador } from "./Jugador";
 import { Consola } from "../vistas/consola";
+import { timeout } from "../util/timeout";
 const jugadorDefecto = {
   nombre: "JUGADOR",
   recordRondas: 0,
@@ -66,10 +67,20 @@ export class Juego {
       alternativaEscogida
     );
   }
+  private async retornar_jugadores() {
+    const jugadores: any[] =
+      await this.jugador?.retornar_datos_tabla_clasificacion();
+    let cantidad_jugadores = 11;
+    if (jugadores.length < 10) {
+      cantidad_jugadores = jugadores.length;
+    }
+    return { jugadores, cantidad_jugadores };
+  }
   private async ejecucion_rondas() {
     let premio: number;
     for (let numeroRonda = 1; numeroRonda <= 5; numeroRonda++) {
       premio = await this.retornar_premio_ronda(numeroRonda);
+      await timeout();
       if (premio == 0) {
         await this.jugador_perdio();
         break;
@@ -89,6 +100,13 @@ export class Juego {
   public async jugar() {
     await this.crear_jugador(this.nombre_jugador);
     await this.ejecucion_rondas();
+    const { jugadores, cantidad_jugadores } = await this.retornar_jugadores();
+    //si la cantidad de jugadores es mayor que uno, muestra el top de la cantidad de jugadores dada -1. Por lo que máximo daría un top 10;
+    await timeout();
+    if (cantidad_jugadores > 1) {
+      Consola.mostrar_tabla_clasificacion(jugadores, cantidad_jugadores - 1);
+    }
+    await timeout();
     Consola.mostar_juego_finalizado();
   }
 }

@@ -1,6 +1,6 @@
 import { connectDB } from "./baseDeDatos";
 import { Juego } from "./controladores/Juego";
-import {Consola} from './vistas/consola'
+import { Consola } from "./vistas/consola";
 async function inicio() {
   let nombreJugador = "";
   do {

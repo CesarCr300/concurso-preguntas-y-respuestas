@@ -3,8 +3,8 @@ export class Servicio {
   constructor(Modelo: any) {
     this.Modelo = Modelo;
   }
-  async obtener_todos(): Promise<object>;
-  async obtener_todos(parametros: object): Promise<object>;
+  async obtener_todos(): Promise<any>;
+  async obtener_todos(parametros: object): Promise<any>;
   async obtener_todos(parametros?: object) {
     if (parametros) {
       return await this.Modelo.findAll(parametros);

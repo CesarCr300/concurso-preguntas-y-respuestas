@@ -8,7 +8,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models: any) {
-      Jugador.hasMany(models.Ronda)
+      Jugador.hasMany(models.Ronda);
     }
   }
   Jugador.init(
@@ -22,6 +22,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       premio: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0,
       },
       nombre: {
         type: DataTypes.STRING,
@@ -30,6 +31,7 @@ module.exports = (sequelize: any, DataTypes: any) => {
       record_rondas: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0,
       },
     },
     {
