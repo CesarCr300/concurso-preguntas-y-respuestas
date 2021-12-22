@@ -51,6 +51,7 @@ export class Juego {
     const opcion = this.mensaje_desea_continuar();
     return opcion !== "x";
   }
+  //retorna datos
   private async retornar_objeto_ronda(numeroRonda: number) {
     const rondaInstancia = await this.jugador?.crear_instancia_ronda();
     return new Ronda(numeroRonda, rondaInstancia);
@@ -76,16 +77,17 @@ export class Juego {
     }
     return { jugadores, cantidad_jugadores };
   }
-  private async ejecucion_rondas() {
+  //ejecuta las rondas
+  private async ejecucion_rondas(cantidadRondas: number = 5) {
     let premio: number;
-    for (let numeroRonda = 1; numeroRonda <= 5; numeroRonda++) {
+    for (let numeroRonda = 1; numeroRonda <= cantidadRondas; numeroRonda++) {
       premio = await this.retornar_premio_ronda(numeroRonda);
       await timeout();
       if (premio == 0) {
         await this.jugador_perdio();
         break;
       }
-      if (numeroRonda == 5) {
+      if (numeroRonda == cantidadRondas) {
         await this.jugador_gano(premio);
         break;
       } else {

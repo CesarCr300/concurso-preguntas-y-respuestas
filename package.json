@@ -1,13 +1,12 @@
 {
   "name": "concurso-de-preguntas-y-respuestas",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "src_js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn src/index.ts",
-    "start": "ts-node src/index.ts",
-    "seeder": "tsnd --respawn src/baseDeDatos/seeders/Categorias.ts"
+    "start": "ts-node src/index.ts"
   },
   "keywords": [],
   "author": "Cesar Jesus Contreras Romero",
