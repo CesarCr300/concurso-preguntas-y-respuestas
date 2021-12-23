@@ -13,23 +13,23 @@ export class Ronda {
   }
   //logica
   private corroborar_alternativa_escogida(
-    respuesta_correcta: string,
+    respuestaCorrecta: string,
     alternativas: string[],
-    alternativa_escogida: string
+    alternativaEscogida: string
   ): boolean {
-    const posicion_alternativa_correcta =
-      alternativas.indexOf(respuesta_correcta) + 1;
-    return posicion_alternativa_correcta.toString() == alternativa_escogida;
+    const posicionAlternativaCorrecta =
+      alternativas.indexOf(respuestaCorrecta) + 1;
+    return posicionAlternativaCorrecta.toString() == alternativaEscogida;
   }
   public retornar_premio(
-    respuesta_correcta: string,
+    respuestaCorrecta: string,
     alternativas: string[],
-    alternativa_escogida: string
+    alternativaEscogida: string
   ) {
     return this.corroborar_alternativa_escogida(
-      respuesta_correcta,
+      respuestaCorrecta,
       alternativas,
-      alternativa_escogida
+      alternativaEscogida
     )
       ? this.premio
       : 0;
@@ -50,10 +50,10 @@ export class Ronda {
     return await categoria.retornar_datos_pregunta(numeroPregunta);
   }
   private retornar_alternativas_desordenadas(
-    alternativa_correcta: string,
-    alternativas_erradas: string[]
+    alternativaCorrecta: string,
+    alternativaErradas: string[]
   ) {
-    let alternativas = [...alternativas_erradas, alternativa_correcta];
+    let alternativas = [...alternativaErradas, alternativaCorrecta];
     alternativas = alternativas.sort(function () {
       return Math.random() - 0.5;
     });

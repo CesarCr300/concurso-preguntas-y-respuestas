@@ -3,7 +3,7 @@
     "database": "concurso_preguntas",
     "dialect": "sqlite",
     "storage": "concurso_preguntas_desarrollo.db",
-    "logging":false
+    "logging": false
   },
   "test": {
     "database": "concurso_preguntas_test",
@@ -13,6 +13,7 @@
   "production": {
     "database": "concurso_preguntas",
     "dialect": "sqlite",
-    "storage": "concurso_preguntas_produccion.db"
+    "storage": "concurso_preguntas_produccion.db",
+    "logging": false
   }
 }

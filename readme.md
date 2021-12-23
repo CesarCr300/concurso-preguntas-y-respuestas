@@ -9,7 +9,6 @@ Ejecutas el siguiente comando:
 ```
     npm install
 ```
-
 ##Para iniciar el programa:
 Ejecutas el siguiente comando:
 ```

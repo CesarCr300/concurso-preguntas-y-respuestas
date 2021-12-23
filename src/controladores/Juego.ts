@@ -10,9 +10,9 @@ const jugadorDefecto = {
 
 export class Juego {
   jugador?: Jugador;
-  nombre_jugador: string;
-  constructor(nombre_jugador: string) {
-    this.nombre_jugador = nombre_jugador;
+  nombreJugador: string;
+  constructor(nombreJugador: string) {
+    this.nombreJugador = nombreJugador;
   }
   //mensajes
   private mensaje_desea_continuar() {
@@ -20,15 +20,15 @@ export class Juego {
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
     return Consola.retorna_opcion_desea_continuar(nombre, premio, recordRondas);
   }
-  private mensaje_jugador(frase_inicial: string, frase_final: string) {
+  private mensaje_jugador(fraseInicial: string, fraseFinal: string) {
     let { nombre, recordRondas, premio } =
       this.jugador?.retornar_datos_jugador() || jugadorDefecto;
     Consola.mostrar_mensaje_jugador(
       nombre,
       premio,
       recordRondas,
-      frase_inicial,
-      frase_final
+      fraseInicial,
+      fraseFinal
     );
   }
   //se ejecuta segun jugador
@@ -100,7 +100,7 @@ export class Juego {
     }
   }
   public async jugar() {
-    await this.crear_jugador(this.nombre_jugador);
+    await this.crear_jugador(this.nombreJugador);
     await this.ejecucion_rondas();
     const { jugadores, cantidad_jugadores } = await this.retornar_jugadores();
     //si la cantidad de jugadores es mayor que uno, muestra el top de la cantidad de jugadores dada -1. Por lo que máximo daría un top 10;
